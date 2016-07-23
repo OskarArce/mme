@@ -1,0 +1,22 @@
+{
+  "name": "mme",
+  "version": "1.0.0",
+  "description": "Master en Medicina de Emergencia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OskarArce/mme.git"
+  },
+  "author": "Oscar Arce Balluerca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OskarArce/mme/issues"
+  },
+  "homepage": "https://github.com/OskarArce/mme#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
