@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 		col.count(function(err, count){
 			res.status(200).jsonp({'data': {
 				'dbInfo': mongoMgr.dbDetails,
-				'pageCount': -1
+				'pageCountMessage': -1
 			}});
 		});
 	}
@@ -32,7 +32,7 @@ router.post('/', function (req, res) {
 		col.count(function(err, count){
 			res.status(200).jsonp({'data': {
 				'dbInfo': mongoMgr.dbDetails,
-				'pageCount': -1
+				'pageCountMessage': -1
 			}});
 		});
 	}
