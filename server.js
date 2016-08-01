@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({'extended': false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-	res.render('index.html', { pageCountMessage : null});
+	res.render('index.html', {'dbInfo': mongoMgr.dbDetails});
 });
 app.use(require('./controllers/router'));
 
