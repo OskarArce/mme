@@ -7,11 +7,11 @@ let mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
 	dbDetails = new Object();
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
-	var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
+	let mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
 		mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
 		mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
 		mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-		mongoPassword = process.env[mongoServiceName + '_PASSWORD']
+		mongoPassword = process.env[mongoServiceName + '_PASSWORD'],
 		mongoUser = process.env[mongoServiceName + '_USER'];
 
 	if (mongoHost && mongoPort && mongoDatabase) {
@@ -28,7 +28,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 function initDb(callback) {
 	if (mongoURL == null) return;
 
-	var mongodb = require('mongodb');
+	let mongodb = require('mongodb');
 	if (mongodb == null) return;
 
 	mongodb.connect(mongoURL, function(err, conn) {
