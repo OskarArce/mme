@@ -11,9 +11,7 @@ router.get('/', function (req, res) {
 		let col = mongoMgr.db.collection('counts');
 
 		col.count(function(err, count){
-			res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
 			res.status(200).jsonp({'data': {
-				'pageCountMessage': count,
 				'dbInfo': mongoMgr.dbDetails
 			}});
 		});
@@ -31,9 +29,7 @@ router.post('/', function (req, res) {
 		let col = mongoMgr.db.collection('counts');
 
 		col.count(function(err, count){
-			res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
 			res.status(200).jsonp({'data': {
-				'pageCountMessage': count,
 				'dbInfo': mongoMgr.dbDetails
 			}});
 		});
