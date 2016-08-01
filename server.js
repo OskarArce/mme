@@ -4,7 +4,7 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
 	morgan  = require('morgan'),
-	mongoMgr = require('/managers/mongo');
+	mongoMgr = require('./managers/mongo');
 
 Object.assign = require('object-assign');
 
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.get('/', function (req, res) {
 	res.render('index.html', { pageCountMessage : null});
 });
-app.use(require('/controllers/router'));
+app.use(require('./controllers/router'));
 
 // error handling
 app.use(function(err, req, res, next){
