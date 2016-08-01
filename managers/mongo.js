@@ -43,10 +43,18 @@ function initDb(callback) {
 
 		console.log('Connected to MongoDB at: %s', mongoURL);
 	});
-};
+}
+
+function getDb() {
+	return db;
+}
+
+function getDbDetails() {
+	return dbDetails;
+}
 
 module.exports = {
 	initDb,
-	db,
-	dbDetails
+	getDb,
+	getDbDetails
 };
