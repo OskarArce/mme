@@ -23,6 +23,9 @@ app.use(bodyParser.json());
 app.get('/', function (req, res) {
 	res.render('index.html', {'dbInfo': mongoMgr.dbDetails});
 });
+app.get('/pagecount', function (req, res) {
+	res.send('{ pageCount: -1 }');
+});
 app.use(require('./controllers/router'));
 
 // error handling
