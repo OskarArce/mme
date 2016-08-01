@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router(),
-	mongoMgr = require('../managers/mongo');
+	mongoMgr = require('../../managers/mongo');
 
 router.get('/', function (req, res) {
 	if (!mongoMgr.db) {
