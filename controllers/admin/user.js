@@ -5,14 +5,15 @@ const router = require('express').Router(),
 
 router.get('/', function (req, res) {
 	if (!mongoMgr.db) {
-		mongoMgrinitDb(function(err){});
+		mongoMgr.initDb(function(err){});
 	}
 	if (mongoMgr.db) {
 		let col = mongoMgr.db.collection('counts');
 
 		col.count(function(err, count){
 			res.status(200).jsonp({'data': {
-				'dbInfo': mongoMgr.dbDetails
+				'dbInfo': mongoMgr.dbDetails,
+				'pageCount': -1
 			}});
 		});
 	}
@@ -23,14 +24,15 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 	if (!mongoMgr.db) {
-		mongoMgrinitDb(function(err){});
+		mongoMgr.initDb(function(err){});
 	}
 	if (mongoMgr.db) {
 		let col = mongoMgr.db.collection('counts');
 
 		col.count(function(err, count){
 			res.status(200).jsonp({'data': {
-				'dbInfo': mongoMgr.dbDetails
+				'dbInfo': mongoMgr.dbDetails,
+				'pageCount': -1
 			}});
 		});
 	}

@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({'extended': false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-	res.render('index.html', {'dbInfo': mongoMgr.dbDetails});
+	res.render('index.html', {'dbInfo': mongoMgr.dbDetails, 'pageCount': -1});
 });
 app.get('/pagecount', function (req, res) {
 	res.send('{ pageCount: -1 }');
