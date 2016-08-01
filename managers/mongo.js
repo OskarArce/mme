@@ -1,6 +1,5 @@
 'use strict';
 
-
 let mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
 	mongoURLLabel = '',
 	db = null,
