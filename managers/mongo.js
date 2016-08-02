@@ -43,7 +43,7 @@ function initDb(callback) {
 
 		console.log('Connected to MongoDB at: %s', mongoURL);
 
-		return db;
+		callback(err, conn);
 	});
 }
 

@@ -2,15 +2,26 @@
 
 const router = require('express').Router(),
 	mongoMgr = require('../../managers/mongo'),
-	dbDetails = mongoMgr.getDbDetails();
-
-let db = mongoMgr.getDb();
+	dbDetails = mongoMgr.getDbDetails(),
+	db = mongoMgr.getDb();
 
 router.get('/', function (req, res) {
 	if (!db) {
-		db = mongoMgr.initDb(function(err){});
+		mongoMgr.initDb(function(err, db){
+			if(err) {
+				res.status(500).jsonp({'code': 'error'});
+			}
+			let col = db.collection('counts');
+
+			col.count(function(err, count){
+				res.status(200).jsonp({'data': {
+					'dbInfo': dbDetails,
+					'pageCountMessage': -1
+				}});
+			});
+		});
 	}
-	if (db) {
+	else {
 		let col = db.collection('counts');
 
 		col.count(function(err, count){
@@ -19,9 +30,6 @@ router.get('/', function (req, res) {
 				'pageCountMessage': -1
 			}});
 		});
-	}
-	else {
-		res.status(500).jsonp({'code': 'error'});
 	}
 });
 
