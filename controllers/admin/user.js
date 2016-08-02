@@ -2,8 +2,9 @@
 
 const router = require('express').Router(),
 	mongoMgr = require('../../managers/mongo'),
-	db = mongoMgr.getDb(),
 	dbDetails = mongoMgr.getDbDetails();
+
+let db = mongoMgr.getDb();
 
 router.get('/', function (req, res) {
 	if (!db) {
