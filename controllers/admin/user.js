@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 	if (!db) {
 		mongoMgr.initDb(function(err, db){
 			if(err) {
-				res.status(500).jsonp({'code': 'error'});
+				res.status(500).jsonp({'code': err});
 			}
 			let col = db.collection('counts');
 
