@@ -7,7 +7,7 @@ const router = require('express').Router(),
 
 router.get('/', function (req, res) {
 	if (!db) {
-		mongoMgr.initDb(function(err){});
+		db = mongoMgr.initDb(function(err){});
 	}
 	if (db) {
 		let col = db.collection('counts');
@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 	if (!db) {
-		mongoMgr.initDb(function(err){});
+		db = mongoMgr.initDb(function(err){});
 	}
 	if (db) {
 		let col = db.collection('counts');
