@@ -4,7 +4,9 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
 	morgan  = require('morgan'),
-	mongoMgr = require('./managers/mongo');
+	mongoMgr = require('./managers/mongo'),
+	db = mongoMgr.getDb(),
+	dbDetails = mongoMgr.getDbDetails();
 
 Object.assign = require('object-assign');
 
@@ -21,7 +23,7 @@ app.use(bodyParser.urlencoded({'extended': false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-	res.render('index.html', {'dbInfo': mongoMgr.dbDetails, 'pageCountMessage': -1});
+	res.render('index.html', {'dbInfo': dbDetails, 'pageCountMessage': -1});
 });
 app.get('/pagecount', function (req, res) {
 	res.send('{ pageCount: -1 }');
