@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router({'mergeParams': true}),
-	users = require('../../managers/users');
+	users = require('../../../managers/users');
 
 router.get('/', function (req, res) {
 	users.getUser(req.params.user_id).then(
