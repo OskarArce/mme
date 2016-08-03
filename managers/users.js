@@ -15,6 +15,14 @@ const create = (data, cb) => {
 	return user.save(cb);
 };
 
+const update = (id, data, cb) => {
+	return User.findByIdAndUpdate(id, {'$set': data}, cb);
+};
+
+const delete = (id, cb) => {
+	return User.findByIdAndRemove(id, cb);
+};
+
 const load = () => {
 	return User.create([
 		{
@@ -29,5 +37,7 @@ module.exports = {
 	listAll,
 	getUser,
 	create,
+	update,
+	delete,
 	load
 };

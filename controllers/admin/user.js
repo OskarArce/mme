@@ -14,6 +14,39 @@ router.get('/', function (req, res) {
 	);
 });
 
+router.post('/', function (req, res) {
+	users.create(req.body).then(
+		(user) => {
+			return res.jsonp({'data': user});
+		},
+		(err) => {
+			return res.jsonp({'code': 'error_listAll_users', 'desc': err});
+		}
+	);
+});
+
+router.put('/:user_id', function (req, res) {
+	users.update(req.params.user_id, req.body).then(
+		(users) => {
+			return res.jsonp({'data': users});
+		},
+		(err) => {
+			return res.jsonp({'code': 'error_listAll_users', 'desc': err});
+		}
+	);
+});
+
+router.delete('/:user_id', function (req, res) {
+	users.delete(req.params.user_id).then(
+		(users) => {
+			return res.jsonp({'data': users});
+		},
+		(err) => {
+			return res.jsonp({'code': 'error_listAll_users', 'desc': err});
+		}
+	);
+});
+
 // router.post('/', function (req, res) {
 // 	if (!db) {
 // 		db = mongoMgr.initDb(function(err){});
