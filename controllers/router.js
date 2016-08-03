@@ -9,7 +9,8 @@ router.use('/user', require('./user/user'));
 
 /******************/
 /* Administrators */
-router.use('/admin/user', require('./admin/user'));
+router.use('/admin/user', require('./admin/user/list'));
+router.use('/admin/user/:user_id', require('./admin/user/detail'));
 router.use('/admin/load', require('./admin/load'));
 /* Administrators */
 /******************/
