@@ -3,9 +3,7 @@ const express = require('express'),
 	app     = express(),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
-	morgan  = require('morgan'),
-	mongoMgr = require('./managers/mongo'),
-	dbDetails = mongoMgr.getDbDetails();
+	morgan  = require('morgan');
 
 Object.assign = require('object-assign');
 
@@ -22,7 +20,7 @@ app.use(bodyParser.urlencoded({'extended': false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-	res.render('index.html', {'dbInfo': dbDetails, 'pageCountMessage': -1});
+	res.render('index.html', {'pageCountMessage': -1});
 });
 app.get('/pagecount', function (req, res) {
 	res.send('{ pageCount: -1 }');
