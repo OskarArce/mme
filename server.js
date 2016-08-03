@@ -4,7 +4,7 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
 	morgan  = require('morgan'),
-	mongoMgr = require('managers/mongo');
+	mongoMgr = require('./managers/mongo');
 
 Object.assign = require('object-assign');
 
