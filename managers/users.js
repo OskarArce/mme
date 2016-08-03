@@ -19,7 +19,7 @@ const update = (id, data, cb) => {
 	return User.findByIdAndUpdate(id, {'$set': data}, cb);
 };
 
-const delete = (id, cb) => {
+const remove = (id, cb) => {
 	return User.findByIdAndRemove(id, cb);
 };
 
@@ -38,6 +38,6 @@ module.exports = {
 	getUser,
 	create,
 	update,
-	delete,
+	remove,
 	load
 };

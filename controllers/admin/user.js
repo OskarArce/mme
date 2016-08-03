@@ -37,7 +37,7 @@ router.put('/:user_id', function (req, res) {
 });
 
 router.delete('/:user_id', function (req, res) {
-	users.delete(req.params.user_id).then(
+	users.remove(req.params.user_id).then(
 		(users) => {
 			return res.jsonp({'data': users});
 		},
