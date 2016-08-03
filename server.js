@@ -3,7 +3,8 @@ const express = require('express'),
 	app     = express(),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
-	morgan  = require('morgan');
+	morgan  = require('morgan'),
+	mongoMgr = require('managers/mongo');
 
 Object.assign = require('object-assign');
 
