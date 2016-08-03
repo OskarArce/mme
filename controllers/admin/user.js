@@ -1,36 +1,17 @@
 'use strict';
 
 const router = require('express').Router(),
-	mongoMgr = require('../../managers/mongo'),
-	dbDetails = mongoMgr.getDbDetails(),
-	db = mongoMgr.getDb();
+	users = require('../managers/users');
 
 router.get('/', function (req, res) {
-	if (!db) {
-		mongoMgr.initDb(function(err, db){
-			if(err) {
-				res.status(500).jsonp({'code': err});
-			}
-			let col = db.collection('counts');
-
-			col.count(function(err, count){
-				res.status(200).jsonp({'data': {
-					'dbInfo': dbDetails,
-					'pageCountMessage': -1
-				}});
-			});
-		});
-	}
-	else {
-		let col = db.collection('counts');
-
-		col.count(function(err, count){
-			res.status(200).jsonp({'data': {
-				'dbInfo': dbDetails,
-				'pageCountMessage': -1
-			}});
-		});
-	}
+	users.listAll().then(
+		(users) => {
+			return res.jsonp({'data': users});
+		},
+		(err) => {
+			return res.jsonp({'code': 'error_listAll_users', 'desc': err});
+		}
+	);
 });
 
 // router.post('/', function (req, res) {
