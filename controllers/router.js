@@ -10,7 +10,7 @@ router.use('/user', require('./user/user'));
 /******************/
 /* Administrators */
 router.use('/admin/user', require('./admin/user'));
-router.use('/admin/user', require('./admin/user'));
+router.use('/admin/load', require('./admin/load'));
 /* Administrators */
 /******************/
 

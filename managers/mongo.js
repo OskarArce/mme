@@ -2,8 +2,7 @@
 
 let mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
 	mongoURLLabel = '',
-	db = null,
-	dbDetails = new Object();
+	mongoose = require('mongoose');
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 	let mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
@@ -30,33 +29,13 @@ function initDb(callback) {
 	let mongodb = require('mongodb');
 	if (mongodb == null) return;
 
-	mongodb.connect(mongoURL, function(err, conn) {
-		if (err) {
-			callback(err);
-			return;
-		}
-
-		db = conn;
-		dbDetails.databaseName = db.databaseName;
-		dbDetails.url = mongoURLLabel;
-		dbDetails.type = 'MongoDB';
-
+	mongoose.connect(mongoURL, function(err) {
+		callback(err);
 		console.log('Connected to MongoDB at: %s', mongoURL);
-
-		callback(err, conn);
+		return;
 	});
 }
 
-function getDb() {
-	return db;
-}
-
-function getDbDetails() {
-	return dbDetails;
-}
-
 module.exports = {
-	initDb,
-	getDb,
-	getDbDetails
+	initDb
 };

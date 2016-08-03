@@ -5,7 +5,6 @@ const express = require('express'),
 	cors = require('cors'),
 	morgan  = require('morgan'),
 	mongoMgr = require('./managers/mongo'),
-	db = mongoMgr.getDb(),
 	dbDetails = mongoMgr.getDbDetails();
 
 Object.assign = require('object-assign');
