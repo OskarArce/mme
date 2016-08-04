@@ -11,8 +11,8 @@ const create = (data) => {
 	return new Promise((resolve, reject) => {
 		securityMgr.pbkdf2(data.password).then(
 			(password) => {
-				let user = new User(Object.assign(data, {'password': password}));
-				user.save().then(resolve, reject);
+				data.password = password;
+				(new User(data)).save().then(resolve, reject);
 			},
 			reject
 		);
