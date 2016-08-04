@@ -15,7 +15,7 @@ const pbkdf2 = (password) => new Promise((resolve, reject) => {
 });
 
 const token = (payload) => new Promise((resolve, reject) => {
-	jwt.sign(payload, key, {'expiresIn': 86400}, function (err, token) {
+	jwt.sign(payload, key, {'expiresIn': 86400}, (err, token) => {
 		if (err) {
 			reject(err);
 		}
