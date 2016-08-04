@@ -9,27 +9,30 @@ const getUser = (id) => User.findById(id);
 
 const create = (data) => {
 	return new Promise((resolve, reject) => {
-		securityMgr.pbkdf2(data.password).then(
-			(password) => {
-				data.password = password;
-				(new User(data)).save().then(resolve, reject);
-			},
-			reject
-		);
+		securityMgr.pbkdf2(data.password)
+			.then(
+				(password) => {
+					(new User(Object.assign(data, {'password': password})))
+						.save()
+						.then(resolve, reject);
+				},
+				reject
+			);
 	});
 };
 
 const update = (id, data) => {
 	return new Promise((resolve, reject) => {
-		securityMgr.pbkdf2(data.password).then(
-			(key) => {
-				User.findByIdAndUpdate(
-					id,
-					{'$set': Object.assign(data, {'password': key.toString('hex')})}
-				).then(resolve, reject)
-			},
-			reject
-		);
+		securityMgr.pbkdf2(data.password)
+			.then(
+				(password) => {
+					User.findByIdAndUpdate(
+						id,
+						{'$set': Object.assign(data, {'password': password})}
+					).then(resolve, reject);
+				},
+				reject
+			);
 	});
 };
 

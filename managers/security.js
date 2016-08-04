@@ -5,14 +5,12 @@ const crypto = require('crypto'),
 
 const pbkdf2 = (password) => {
 	return new Promise((resolve, reject) => {
-		resolve(password);
-		// resolve(crypto.pbkdf2Sync(password, salt, 100000, 512, 'sha512'));
-		// crypto.pbkdf2(password, salt, 100000, 512, 'sha512', (err, key) => {
-		// 	if (err) {
-		// 		reject(err);
-		// 	}
-		// 	resolve(key.toString('hex'));
-		// });
+		crypto.pbkdf2(password, salt, 100000, 512, 'sha512', (err, key) => {
+			if (err) {
+				reject(err);
+			}
+			resolve(key.toString('hex'));
+		});
 	});
 };
 
