@@ -12,12 +12,12 @@ router.get('/', function (req, res) {
 
 router.put('/', function (req, res) {
 	users.update(req.params.user_id, req.body).then(
-		(users) => {
+		() => {
 			users.getUser(req.params.user_id).then(
 				(user) => res.json({'data': user}),
 				(err) => res.json({'code': 'error_getUser_users', 'desc': err})
-			)
-		}
+			);
+		},
 		(err) => res.json({'code': 'error_update_users', 'desc': err})
 	);
 });
