@@ -6,7 +6,10 @@ const crypto = require('crypto'),
 const pbkdf2 = (password) => {
 	return new Promise((resolve, reject) => {
 		crypto.pbkdf2(password, salt, 100000, 512, 'sha512', (err, key) => {
-			if (err) reject(err);
+			if (err) {
+				console.log('pbkdf2', '>>>>>>>>>>>>>>>>', err);
+				reject(err);
+			}
 			resolve(key);
 		});
 	});
