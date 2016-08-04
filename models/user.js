@@ -15,8 +15,14 @@ const UserSchema = new mongoose.Schema(
 		'role': {
 			'type': String,
 			'require': true,
-			'enum': ['admin', 'student', 'teacher'],
-			'default': 'student'
+			'enum': Object.keys(global.role).reduce(
+				(roles, roleKey) => {
+					roles.push(role[roleKey]);
+					return roles;
+				},
+				[]
+			),
+			'default': global.role.STUDENT
 		}
 	},
 	{
