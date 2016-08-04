@@ -34,7 +34,7 @@ const verifyUser = (req, res, next) => {
 };
 
 const verifyAdmin = (req, res, next) => {
-	if (!req.auth_user || req.auth_user.role !== global.role.admin) {
+	if (!req.auth_user || req.auth_user.role !== global.role.ADMIN) {
 		return res.status(400).json({'code': 'unauthorized'});
 	}
 	return next();

@@ -6,6 +6,12 @@ const express = require('express'),
 	morgan  = require('morgan'),
 	mongoMgr = require('./managers/mongo');
 
+global.role = {
+	'ADMIN': admin,
+	'TEACHER': teacher,
+	'STUDENT': student
+};
+
 Object.assign = require('object-assign');
 
 app.engine('html', require('ejs').renderFile);
