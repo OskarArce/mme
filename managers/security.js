@@ -11,7 +11,7 @@ const pbkdf2 = (password) => {
 		// 	if (err) {
 		// 		reject(err);
 		// 	}
-		// 	resolve(key);
+		// 	resolve(key.toString('hex'));
 		// });
 	});
 };

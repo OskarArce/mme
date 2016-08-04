@@ -8,16 +8,15 @@ const listAll = () => User.find({});
 const getUser = (id) => User.findById(id);
 
 const create = (data) => {
-	return securityMgr.pbkdf2(data.password);
-	// return new Promise((resolve, reject) => {
-	// 	securityMgr.pbkdf2(data.password).then(
-	// 		(key) => {
-	// 			let user = new User(Object.assign(data, {'password': key.toString('hex')}));
-	// 			user.save().then(resolve, reject);
-	// 		},
-	// 		reject
-	// 	);
-	// });
+	return new Promise((resolve, reject) => {
+		securityMgr.pbkdf2(data.password).then(
+			(password) => {
+				let user = new User(Object.assign(data, {'password': password}));
+				user.save().then(resolve, reject);
+			},
+			reject
+		);
+	});
 };
 
 const update = (id, data) => {
