@@ -7,6 +7,8 @@ const listAll = () => User.find({});
 
 const getUser = (id) => User.findById(id);
 
+const findUser = (data) => User.find(data);
+
 const create = (data) => {
 	return new Promise((resolve, reject) => {
 		securityMgr.pbkdf2(data.password)
@@ -51,6 +53,7 @@ const load = () => {
 module.exports = {
 	listAll,
 	getUser,
+	findUser,
 	create,
 	update,
 	remove,
