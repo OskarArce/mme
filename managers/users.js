@@ -10,7 +10,7 @@ const getUser = (id) => User.findById(id);
 const create = (data) => {
 	return new Promise((resolve, reject) => {
 		securityMgr.pbkdf2(data.password).then(
-			(key) => {
+			(key) => { 
 				let user = new User(Object.assign(data, {'password': key.toString('hex')}));
 				user.save().then(resolve, reject);
 			},
