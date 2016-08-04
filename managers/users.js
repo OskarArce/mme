@@ -7,7 +7,16 @@ const listAll = () => User.find({});
 
 const getUser = (id) => User.findById(id);
 
-const findUser = (data) => User.findOne(data);
+const findUser = (data) => {
+	return new Promise((resolve, reject) => {
+		User.findOne(data, function (err, user) {
+			if (err) {
+				reject(err);
+			}
+			resolve(user);
+		});
+	});
+};
 
 const create = (data) => {
 	return new Promise((resolve, reject) => {
