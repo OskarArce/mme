@@ -1,11 +1,13 @@
 'use strict';
 
 const securityMgr = require('../managers/security'),
-	usersMgr = require('../managers/users');
+	users = require('../managers/users');
 
 const verifyToken = (req, res, next) => {
 	var token = req.headers['x-smart-token'];
-	res.status(200).json({'wtf': token})
+	if (!token) {
+		return res.status(401).json({'code': 'unauthorized'});
+	}
 	securityMgr.verifyToken(token).then(
 		(decoded) => {
 			req.auth_token = decoded;
@@ -20,8 +22,8 @@ const verifyUser = (req, res, next) => {
 		res.status(400).jsonp({'code': 'wrong_username'});
 	}
 	let verifyUserPromise = req.auth_token ?
-		usersMgr.getUser(req.auth_token._id) :
-		usersMgr.findUser({'username': req.body.username, 'password': req.body.password});
+		users.getUser(req.auth_token._id) :
+		users.findUser({'username': req.body.username, 'password': req.body.password});
 	verifyUserPromise.then(
 		(user) => {
 			if (!user) {
