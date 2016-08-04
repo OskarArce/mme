@@ -14,7 +14,14 @@ const pbkdf2 = (password) => new Promise((resolve, reject) => {
 	});
 });
 
-const token = (user) => jwt.sign(user, key, {'expiresIn': 86400});
+const token = (payload) => new Promise((resolve, reject) => {
+	jwt.sign(payload, key, {'expiresIn': 86400}, function (err, token) {
+		if (err) {
+			reject(err);
+		}
+		resolve(token);
+	});
+});
 
 module.exports = {
 	pbkdf2,

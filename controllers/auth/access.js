@@ -11,8 +11,11 @@ router.post('/', function (req, res) {
 				res.status(404).json({'code': 'error_unauthorized_auth'});
 			}
 			else {
-				let token = securityMgr.token(user);
-				res.json({'data': {'token': token}});
+				securityMgr.token(user).then(
+					(token) => res.json({'data': {'token': token}}),
+					(err) => res.json({'code': 'error_token_auth', 'desc': err})
+				);
+
 			}
 		},
 		(err) => res.json({'code': 'error_find_auth', 'desc': err})
