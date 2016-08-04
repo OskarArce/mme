@@ -4,7 +4,8 @@ const securityMgr = require('../managers/security'),
 	usersMgr = require('../managers/users');
 
 const verifyToken = (req, res, next) => {
-	var token = req.params.token || req.headers['x-smart-token'];
+	var token = req.headers['x-smart-token'];
+	res.status(200).json({'wtf': token})
 	securityMgr.verifyToken(token).then(
 		(decoded) => {
 			req.auth_token = decoded;

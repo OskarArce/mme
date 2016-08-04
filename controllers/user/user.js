@@ -5,12 +5,8 @@ const router = require('express').Router(),
 
 router.get('/', function (req, res) {
 	users.listAll().then(
-		(users) => {
-			return res.jsonp({'data': users});
-		},
-		(err) => {
-			return res.jsonp({'code': 'error_listAll_users', 'desc': err});
-		}
+		(users) => res.json({'data': users}),
+		(err) => res.json({'code': 'error_listAll_users', 'desc': err})
 	);
 });
 

@@ -17,9 +17,9 @@ const pbkdf2 = (password) => new Promise((resolve, reject) => {
 const signToken = (payload) => new Promise((resolve, reject) => {
 	jwt.sign(payload, key, {'expiresIn': 86400}, (err, token) => {
 		if (err) {
-			reject(err);
+			return reject(err);
 		}
-		resolve(token);
+		return resolve(token);
 	});
 });
 
@@ -28,9 +28,7 @@ const verifyToken = (token) => new Promise((resolve, reject) => {
 		if (err) {
 			return reject(err);
 		}
-		else {
-			return resolve(payload);
-		}
+		return resolve(payload);
 	});
 });
 
