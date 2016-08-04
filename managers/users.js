@@ -20,7 +20,8 @@ const findUser = (data) => {
 		passPromise.then(
 			(password) => {
 				data.password = password;
-				User.findOne(data, function (err, user) {
+				res.json({'data': data});
+				User.findOne(data, (err, user) => {
 					if (err) {
 						reject(err);
 					}

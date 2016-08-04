@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
 				);
 			}
 			else {
-				res.status(400).json({'code': 'error_unauthorized_auth'});
+				res.status(404).json({'code': 'error_unauthorized_auth', 'desc': req.body});
 			}
 		},
 		(err) => res.json({'code': 'error_find_auth', 'desc': err})
