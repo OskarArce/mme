@@ -7,9 +7,9 @@ const express = require('express'),
 	mongoMgr = require('./managers/mongo');
 
 global.role = {
-	'ADMIN': admin,
-	'TEACHER': teacher,
-	'STUDENT': student
+	'ADMIN': 'admin',
+	'TEACHER': 'teacher',
+	'STUDENT': 'student'
 };
 
 Object.assign = require('object-assign');
