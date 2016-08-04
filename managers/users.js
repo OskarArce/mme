@@ -9,12 +9,26 @@ const getUser = (id) => User.findById(id);
 
 const findUser = (data) => {
 	return new Promise((resolve, reject) => {
-		User.findOne(data, function (err, user) {
-			if (err) {
-				reject(err);
+		let passPromise = new Promise((resolvePass, rejectPass) => {
+			if (!data.password) {
+				resolvePass();
 			}
-			resolve(user);
+			else {
+				securityMgr.pbkdf2(data.password).then(resolvePass, rejectPass);
+			}
 		});
+		passPromise.then(
+			(password) => {
+				data.password = password;
+				User.findOne(data, function (err, user) {
+					if (err) {
+						reject(err);
+					}
+					resolve(user);
+				});
+			},
+			reject
+		);
 	});
 };
 

@@ -24,7 +24,7 @@ router.put('/', function (req, res) {
 
 router.delete('/', function (req, res) {
 	users.remove(req.params.user_id).then(
-		() => res.send(204),
+		() => res.status(204).send(),
 		(err) => res.json({'code': 'error_delete_users', 'desc': err})
 	);
 });

@@ -6,10 +6,10 @@ const router = require('express').Router(),
 router.post('/', (req, res) => {
 	users.load().then(
 		(users) => {
-			return res.jsonp({'data': users});
+			return res.json({'data': users});
 		},
 		(err) => {
-			return res.jsonp({'code': 'error_load_users', 'desc': err});
+			return res.json({'code': 'error_load_users', 'desc': err});
 		}
 	);
 });
