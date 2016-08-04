@@ -12,11 +12,11 @@ router.post('/', function (req, res) {
 			}
 			else {
 				let payload = user.toObject({'getters': false, virtuals: false});
-				// res.json({'data': {'user': user, 'payload': payload}});
-				securityMgr.token(payload).then(
-					(token) => res.json({'data': {'token': token}}),
-					(err) => res.json({'code': 'error_token_auth', 'desc': err})
-				);
+				res.json({'data': {'user': user, 'payload': payload}});
+				// securityMgr.token(payload).then(
+				// 	(token) => res.json({'data': {'token': token}}),
+				// 	(err) => res.json({'code': 'error_token_auth', 'desc': err})
+				// );
 			}
 		},
 		(err) => res.json({'code': 'error_find_auth', 'desc': err})
