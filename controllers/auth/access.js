@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router(),
-	securityMgr = require('../../managers/users'),
+	securityMgr = require('../../managers/security'),
 	users = require('../../managers/users');
 
 router.post('/', function (req, res) {
