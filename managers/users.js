@@ -5,9 +5,9 @@ const securityMgr = require ('./security'),
 
 const listAll = () => User.find({});
 
-const get = (id) => User.findById(id);
+const getUser = (id) => User.findById(id);
 
-const find = (data) => {
+const findUser = (data) => {
 	return new Promise((resolve, reject) => {
 		User.findOne(data, function (err, user) {
 			if (err) {
@@ -61,8 +61,8 @@ const load = () => {
 
 module.exports = {
 	listAll,
-	get,
-	find,
+	getUser,
+	findUser,
 	create,
 	update,
 	remove,

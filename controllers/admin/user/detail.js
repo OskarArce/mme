@@ -4,7 +4,7 @@ const router = require('express').Router({'mergeParams': true}),
 	users = require('../../../managers/users');
 
 router.get('/', function (req, res) {
-	users.get(req.params.user_id).then(
+	users.getUser(req.params.user_id).then(
 		(user) => res.json({'data': user}),
 		(err) => res.json({'code': 'error_get_users', 'desc': err})
 	);
@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 router.put('/', function (req, res) {
 	users.update(req.params.user_id, req.body).then(
 		() => {
-			users.get(req.params.user_id).then(
+			users.getUser(req.params.user_id).then(
 				(user) => res.json({'data': user}),
 				(err) => res.json({'code': 'error_get_users', 'desc': err})
 			);
