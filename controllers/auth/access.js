@@ -3,7 +3,7 @@
 const router = require('express').Router(),
 	securityMgr = require('../../managers/security');
 
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
 	let payload = req.auth_user.toObject({'getters': false, 'virtuals': false});
 	securityMgr.signToken(payload).then(
 		(token) => res.json({'data': {'token': token}}),
