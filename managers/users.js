@@ -20,13 +20,12 @@ const findUser = (data) => {
 		passPromise.then(
 			(password) => {
 				data.password = password;
-				resolve(data);
-				// User.findOne(data, (err, user) => {
-				// 	if (err) {
-				// 		reject(err);
-				// 	}
-				// 	resolve(user);
-				// });
+				User.findOne(data, (err, user) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(user);
+				});
 			},
 			reject
 		);
