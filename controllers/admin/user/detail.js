@@ -1,7 +1,10 @@
 'use strict';
 
 const router = require('express').Router({'mergeParams': true}),
-	users = require('../../../managers/users');
+	users = require('../../../managers/users'),
+	mw = {
+		'validator': require('../../../middlewares/validator')
+	};
 
 router.get('/', function (req, res) {
 	users.getUser(req.params.user_id).then(
@@ -10,7 +13,7 @@ router.get('/', function (req, res) {
 	);
 });
 
-router.put('/', function (req, res) {
+router.put('/', mw.validator.role, function (req, res) {
 	users.update(req.params.user_id, req.body).then(
 		() => {
 			users.getUser(req.params.user_id).then(

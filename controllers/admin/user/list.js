@@ -1,7 +1,10 @@
 'use strict';
 
 const router = require('express').Router(),
-	users = require('../../../managers/users');
+	users = require('../../../managers/users'),
+	mw = {
+		'validator': require('../../../middlewares/validator')
+	};
 
 router.get('/', function (req, res) {
 	users.listAll().then(
@@ -10,7 +13,7 @@ router.get('/', function (req, res) {
 	);
 });
 
-router.post('/', function (req, res) {
+router.post('/', mw.validator.role, function (req, res) {
 	users.create(req.body).then(
 		(user) => res.json({'data': user}),
 		(err) => res.json({'code': 'error_create_users', 'desc': err})
