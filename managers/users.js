@@ -24,7 +24,7 @@ const findUser = (data) => {
 					if (err) {
 						reject(err);
 					}
-					resolve(data);
+					resolve(user);
 				});
 			},
 			reject

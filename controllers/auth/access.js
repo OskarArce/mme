@@ -7,7 +7,6 @@ const router = require('express').Router(),
 router.post('/', function (req, res) {
 	users.findUser({'nick': req.body.nick, 'password': req.body.password}).then(
 		(user) => {
-			res.status(404).json({'code': 'error_unauthorized_auth', 'desc': user});
 			if (user) {
 				securityMgr.token(user).then(
 					(token) => res.json({'data': {'token': token}}),
