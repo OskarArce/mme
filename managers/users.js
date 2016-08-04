@@ -1,6 +1,7 @@
 'use strict';
 
-const User = require ('../models/user');
+const securityMgr = require ('./security'),
+	User = require ('../models/user');
 
 const listAll = (cb) => {
 	return User.find({}, cb);
@@ -11,12 +12,28 @@ const getUser = (id, cb) => {
 };
 
 const create = (data, cb) => {
-	let user = new User(data);
-	return user.save(cb);
+	securityMgr.pbkdf2(data.password).then(
+		(key) => {
+			data.password = key.toString('hex');
+			let user = new User(data);
+			return user.save(cb);
+		},
+		(err) => {
+			throw err;
+		}
+	);
 };
 
 const update = (id, data, cb) => {
-	return User.findByIdAndUpdate(id, {'$set': data}, cb);
+	securityMgr.pbkdf2(data.password).then(
+		(key) => {
+			data.password = key.toString('hex');
+			return User.findByIdAndUpdate(id, {'$set': data}, cb);
+		},
+		(err) => {
+			throw err;
+		}
+	);
 };
 
 const remove = (id, cb) => {
