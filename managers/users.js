@@ -3,48 +3,43 @@
 const securityMgr = require ('./security'),
 	User = require ('../models/user');
 
-const listAll = (cb) => {
-	return User.find({}, cb);
+const listAll = () => User.find({});
+
+const getUser = (id) => User.findById(id);
+
+const create = (data) => {
+	return new Promise((resolve, reject) => {
+		securityMgr.pbkdf2(data.password).then(
+			(key) => {
+				let user = new User(Object.assign(data, {'password': key.toString('hex')}));
+				user.save().then(resolve, reject);
+			},
+			reject
+		);
+	});
 };
 
-const getUser = (id, cb) => {
-	return User.findById(id, cb);
+const update = (id, data) => {
+	return new Promise((resolve, reject) => {
+		securityMgr.pbkdf2(data.password).then(
+			(key) => {
+				User.findByIdAndUpdate(
+					id,
+					{'$set': Object.assign(data, {'password': key.toString('hex')})}
+				).then(resolve, reject)
+			},
+			reject
+		);
+	});
 };
 
-const create = (data, cb) => {
-	securityMgr.pbkdf2(data.password).then(
-		(key) => {
-			data.password = key.toString('hex');
-			let user = new User(data);
-			return user.save(cb);
-		},
-		(err) => {
-			throw err;
-		}
-	);
-};
-
-const update = (id, data, cb) => {
-	securityMgr.pbkdf2(data.password).then(
-		(key) => {
-			data.password = key.toString('hex');
-			return User.findByIdAndUpdate(id, {'$set': data}, cb);
-		},
-		(err) => {
-			throw err;
-		}
-	);
-};
-
-const remove = (id, cb) => {
-	return User.findByIdAndRemove(id, cb);
-};
+const remove = (id) => User.findByIdAndRemove(id);
 
 const load = () => {
 	return User.create([
 		{
 			'nick': 'oskar.arce',
-			'password': 'qwert',
+			'password': 'qwerty',
 			'role': 'admin',
 		}
 	]);
