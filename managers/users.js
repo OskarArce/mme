@@ -66,7 +66,7 @@ const remove = (id) => User.findByIdAndRemove(id);
 const load = () => {
 	return User.create([
 		{
-			'nick': 'oskar.arce',
+			'username': 'oskar.arce',
 			'password': 'qwerty',
 			'role': 'admin',
 		}

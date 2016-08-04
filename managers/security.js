@@ -14,7 +14,7 @@ const pbkdf2 = (password) => new Promise((resolve, reject) => {
 	});
 });
 
-const token = (payload) => new Promise((resolve, reject) => {
+const signToken = (payload) => new Promise((resolve, reject) => {
 	jwt.sign(payload, key, {'expiresIn': 86400}, (err, token) => {
 		if (err) {
 			reject(err);
@@ -23,7 +23,19 @@ const token = (payload) => new Promise((resolve, reject) => {
 	});
 });
 
+const verifyToken = (token) => new Promise((resolve, reject) => {
+	jwt.verify(token, key, (err, payload) => {
+		if (err) {
+			return reject(err);
+		}
+		else {
+			return resolve(payload);
+		}
+	});
+});
+
 module.exports = {
 	pbkdf2,
-	token
+	signToken,
+	verifyToken
 };
