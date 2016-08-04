@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
 		},
 		(error) => res.status(401).json({'code': 'error_unauthorized_auth', 'desc': err})
 	);
-});
+};
 
 const verifyUser = (req, res, next) => {
 	if (!req.auth_token && !req.body.username && !req.body.password) {
