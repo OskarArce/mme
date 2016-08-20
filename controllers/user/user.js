@@ -3,11 +3,7 @@
 const router = require('express').Router(),
 	users = require('../../managers/users');
 
-router.get('/', (req, res) => {
-	users.listAll().then(
-		(users) => res.json({'data': users}),
-		(err) => res.json({'code': 'error_listAll_users', 'desc': err})
-	);
-});
+// TODO: return user (teacher/student/admin) data
+router.get('/', (req, res) => res.json({'data': req.auth_user}));
 
 module.exports = router;
